@@ -1,0 +1,17 @@
+__pycache__/
+.vscode/
+*.pyc
+audit_outputs/
+AutoRetinalImageSegmentation/
+checkpoints/
+dataset/
+Grad-cam/
+results/
+retfound_features/
+retfound_features_smdg/
+retfound_features_ukb/
+SMDG/
+SMDG_per_dataset/
+SMDG_test/
+UKB-test/
+*.npz
