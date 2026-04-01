@@ -130,7 +130,7 @@ python roi_seg.py
 ### Step 2: RETFound Feature Loading (Optional)
 If using a fusion branch based on foundation model features, run the feature extractor first:
 ```bash
-conda activate retfound_env
+conda activate retfound
 python RETFound_Feature_Loader.py
 ```
 
@@ -146,12 +146,26 @@ bash train.sh
 ```
 
 ### Step 4: Evaluation and Validation
-Test and generate prediction results or calculate metric matrices.
+For standard datasets, you can directly test and generate prediction results using:
 ```bash
 bash test.sh
-python tools/run_eval_all_datasets.py
 ```
 
+**Sub-dataset Evaluation (e.g., SMDG Dataset):**
+If you are using a combined dataset that contains multiple sub-datasets (such as SMDG) and need to evaluate the model's performance on each specific sub-dataset along with the macro-average metrics, follow these steps:
+
+1. **Split the Dataset**: Separate the combined test set into individual sub-datasets.
+   ```bash
+   python tools/split_smdg_test.py
+   ```
+2. **Evaluate Sub-datasets**: Run the evaluation script to test the model across all generated sub-datasets.
+   ```bash
+   python tools/run_eval_all_datasets.py
+   ```
+3. **Calculate Metrics**: Compute the evaluation metrics for each sub-dataset and generate the final macro-average results.
+   ```bash
+   python tools/calc_metrics_per_dataset.py
+   ```
 ---
 
 ## 👁️‍🗨️ 4. Visualization & Interpretability
@@ -184,13 +198,8 @@ Run `draw/draw_radar_chart.py` to plot radar charts comparing multiple metrics (
 
 ---
 
-## 💾 5. Best Checkpoints
-The most performant model weights are located at the following path (for direct loading during inference testing):
-*   `./checkpoints/1-resnet152cbam-2b/model_epoch_best.pth`
 
----
-
-## 📝 6. Citation & License
+## 📝 5. Citation & License
 
 If you use the code, infrastructure (such as the RETFound integration scheme, multi-branch KE-CBAM model), or experimental ideas of this system in your research, project, or product, please cite our paper:
 
