@@ -131,7 +131,11 @@ python roi_seg.py
 If using a fusion branch based on foundation model features, run the feature extractor first:
 ```bash
 conda activate retfound
-python RETFound_Feature_Loader.py
+```
+if choosing `--model: Branch3RCBAM` with attention mechanism KE-CBAM, you need to write a `run_reference.py` to extract the global anatomical priors offline for the model's input, saving as `.pt` files.
+```bash
+cd RETFound
+python run_referance.py
 ```
 
 ### Step 3: Model Training
